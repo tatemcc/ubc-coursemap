@@ -2,6 +2,17 @@
 
 This project is intended to facilitate course planning by displaying an interactive graph of all courses at UBC and how they relate to one another by prerequisite, corequisite, and postrequisite relationships.
 
+## Setup
+
+```bash
+# clone the repo you know how
+cd ubc-coursemap
+pipenv install      # install dependencies
+pipenv shell        # setup virtual environment
+```
+
+See `pipenv`'s documentation for more information
+
 ## Running it locally
 
 To run this project locally, there are a couple of steps involved. Running the `main.py` file will do all of these for you:
