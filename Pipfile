@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+scrape = "*"
+bs4 = "*"
+numpy = "*"
+node = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
