@@ -26,49 +26,48 @@ anychart.onDocumentReady(function () {
 
       chart.listen('click', function(e) {
         var tag = e.domTarget.tag;
-        if(tag) {
-          console.log(`Clicked ${tag.type} with ID ${tag.id}`);
 
-          if(tag.type == 'node') {
-            console.log(tag);
-            
-            var node;
-            for(let i = 0; i < data['nodes'].length; i++) {
-              if(data['nodes'][i]['id'] == tag.id) {
-                node = data['nodes'][i];
-              }
-            }
+        if ( !tag ) return;
 
-            document.getElementById('course-name').innerHTML = `${node.id} (${node.credits}) - ${node.title}`
-            document.getElementById('course-desc').innerHTML = node.desc; 
-          }
+        console.log(`Clicked ${tag.type} with ID ${tag.id}`);
+
+        if (tag.type != 'node') return;
+
+        console.log(tag);
+      
+        var node;
+        for (let i = 0; i < data['nodes'].length; i++) {
+          if(data['nodes'][i]['id'] != tag.id) continue;
+          node = data['nodes'][i];
         }
+
+        document.getElementById('course-name').innerHTML = `${node.id} (${node.credits}) - ${node.title}`
+        document.getElementById('course-desc').innerHTML = node.desc; 
       })
 
       document.body.addEventListener('keypress', function(e) {
         // check if the element is an `input` element and the key is `enter`
-        if(e.target.nodeName === "INPUT" && e.key === 'Enter') {
-          var name = e.target.value;
-          var node;
-          var found = false;
-          for(let i = 0; i < data['nodes'].length; i++) {
-            if(data['nodes'][i]['id'] == name) {
-              node = data['nodes'][i]
-              found = true;
-              break;
-            }
-          }
+        if(e.target.nodeName !== "INPUT" || e.key !== 'Enter') return;
+        var name = e.target.value;
+        var node;
+        var found = false;
 
-          if(found) {
-            console.log(`Found course with id: ${name}`);
-            document.getElementById('course-name').innerHTML = `${node.id} (${node.credits}) - ${node.title}`
-            document.getElementById('course-desc').innerHTML = node.desc;
-
-            chart.unselect();
-            chart.select(name);
-            chart.select('edge')
-          }
+        var data_at_nodes = data['nodes'];
+        for(let i = 0; i < data_at_nodes.length; i++) {
+          if(data_at_nodes[i]['id'] != name) continue;
+          node = data['nodes'][i]
+          found = true;
+          break;
         }
+
+        if(!found) return;
+        console.log(`Found course with id: ${name}`);
+        document.getElementById('course-name').innerHTML = `${node.id} (${node.credits}) - ${node.title}`
+        document.getElementById('course-desc').innerHTML = node.desc;
+
+        chart.unselect();
+        chart.select(name);
+        chart.select('edge')
       });
 
 
