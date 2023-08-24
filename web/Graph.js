@@ -1,5 +1,5 @@
 anychart.onDocumentReady(function () {
-  fetch("../graph.json")
+  fetch("graph.json")
     .then((response) => response.json())
     .then((data) => {
       var chart = anychart.graph();

@@ -47,7 +47,7 @@ def build_graph():
         # Serializing graph to json
         graph_json = json.dumps(graph, indent=4)
         # Save graph to file
-        with open("../graph.json", "w") as outfile:
+        with open("../web/graph.json", "w") as outfile:
             outfile.write(graph_json)
 
     print("Finished building graph!")
